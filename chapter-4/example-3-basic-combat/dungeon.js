@@ -97,7 +97,10 @@ let dungeon = {
                 attacker.moving = false
                 attacker.tweens -= 1
 
-                let damage = attacker.attack()
+                // let damage = attacker.attack()
+                let maxDamage = attacker.attack()
+                let damage = Math.floor(Math.random() * maxDamage) + 1
+
                 victim.healthPoints -= damage
 
                 console.log(`${attacker.name} does ${damage} damage to ${victim.name} which now has ${victim.healthPoints} life left`)

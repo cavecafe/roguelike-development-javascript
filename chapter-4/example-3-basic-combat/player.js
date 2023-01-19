@@ -1,11 +1,16 @@
 import dungeon from "./dungeon.js"
 
 export default class PlayerCharacter {
+
+    healty = Phaser.Display.Color.GetColor(0,255,0)
+    warning = Phaser.Display.Color.GetColor(255,255,0)
+    critical = Phaser.Display.Color.GetColor(255,0,0)
+    
     constructor(x, y) {
         this.name = "The Player"
-        this.movementPoints = 1
+        this.movementPoints = 2
         this.actionPoints = 1
-        this.healthPoints = 15
+        this.healthPoints = 20
         this.cursors = dungeon.scene.input.keyboard.createCursorKeys()
         this.x = x
         this.y = y 
@@ -16,7 +21,7 @@ export default class PlayerCharacter {
     }
 
     refresh() {
-        this.movementPoints = 1
+        this.movementPoints = 2
         this.actionPoints = 1
     }
 
@@ -72,8 +77,14 @@ export default class PlayerCharacter {
             }
         }
 
-        if (this.healthPoints <= 6) {
-            this.sprite.tint = Phaser.Display.Color.GetColor(255,0,0)
+        if (this.healthPoints <= 3) {
+            this.sprite.tint = this.critical
+        } 
+        else if (this.healthPoints <= 8) {
+            this.sprite.tint = this.warning
+        }
+        else {
+            this.sprite.tint = this.healty
         }
     }
 

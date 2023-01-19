@@ -2,26 +2,32 @@ import dungeon from "./dungeon.js"
 
 export default class BasicMonster {
     constructor(x, y) {
-        this.name = "A Dangerous Monster"
+        this.name = "Guard"
         this.movementPoints = 1
-        this.actionPoints = 3
+        this.actionPoints = 1
         this.healthPoints = 1
         this.x = x
         this.y = y
         this.tile = 26
+    }
+
+    init() {
         dungeon.initializeEntity(this)
     }
 
     refresh() {
+        console.log(`${this.name} refresh() called`)
         this.movementPoints = 1
         this.actionPoints = 3
     }
 
     attack() {
+        console.log(`${this.name} attack() called`)
         return 1
     }
 
     turn() {
+        console.log(`${this.name} turn() called`)
         let oldX = this.x
         let oldY = this.y
 
@@ -50,6 +56,7 @@ export default class BasicMonster {
     }
 
     over() {
+        console.log(`${this.name} over() called`)
         return this.movementPoints == 0 && this.actionPoints == 0 && !this.moving
     }
 

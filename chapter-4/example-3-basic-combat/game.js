@@ -2,6 +2,8 @@ import dungeon from "./dungeon.js"
 import tm from "./turnManager.js"
 import PlayerCharacter from "./player.js"
 import BasicMonster from "./monster.js"
+import ScullMonster from "./scull-monster.js"
+import SnakeMonster from "./snake-monster.js"
 
 const scene = {
     preload: function () {
@@ -10,13 +12,26 @@ const scene = {
     },
     create: function () {
         dungeon.initialize(this)
-        dungeon.player = new PlayerCharacter(15, 15)
+
+        dungeon.player = new PlayerCharacter(23, 18)
         tm.addEntity(dungeon.player)
-        tm.addEntity(new BasicMonster(20,20))
-        tm.addEntity(new BasicMonster(20,10))
-        tm.addEntity(new BasicMonster(76,10))
-        tm.addEntity(new BasicMonster(29,24))
-        tm.addEntity(new BasicMonster(29,20))
+
+        var monsters = [
+            new BasicMonster(20,20),
+            new BasicMonster(20,10),
+            new BasicMonster(76,10),
+            new BasicMonster(29,44),
+            new BasicMonster(29,40),
+            new ScullMonster(10, 10, 2, 1, 3),
+            new SnakeMonster(49, 22, 1, 1, 3, 5, 15)
+        ];
+
+        for (let monster of monsters) {
+            monster.init()
+            monster.sprite.tintFill = true
+            tm.addEntity(monster)
+        }
+
     },
     update: function () {
         if (tm.over()) {
@@ -33,7 +48,7 @@ const config = {
     backgroundColor: "#000",
     parent: "game",
     pixelArt: true,
-    zoom: 1,
+    zoom: 2,
     scene: scene,
     physics: {
         default: "arcade",
