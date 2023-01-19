@@ -28,7 +28,6 @@ const scene = {
 
         for (let monster of monsters) {
             monster.init()
-            monster.sprite.tintFill = true
             tm.addEntity(monster)
         }
 
